@@ -13,13 +13,15 @@ import {
 import {NavLink} from 'react-router-dom';
 
 class HomePage extends Component{
+
     render(){
-        return (
+    
+            return (
             <Container>
                 <Jumbotron>
                     <Form>
                         <FormGroup>
-                            <Label for = "email">Email</Label>
+                            <Label for = "email">Email </Label>
                             <Input 
                                 type = "email" 
                                 name = "email"
@@ -35,6 +37,7 @@ class HomePage extends Component{
                                 id = "password"
                                 placeholder = "password"
                             />
+                            
                         </FormGroup>
                         <FormGroup check>
                             <Label check>
