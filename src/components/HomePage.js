@@ -17,45 +17,47 @@ class HomePage extends Component{
     render(){
     
             return (
-            <Container>
-                <Jumbotron>
-                    <Form>
-                        <FormGroup>
-                            <Label for = "email">Email </Label>
-                            <Input 
-                                type = "email" 
-                                name = "email"
-                                id = "email"
-                                placeholder = "abc@example.com"
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for = "password">Password</Label>
-                            <Input
-                                type = "password"
-                                name = "password"
-                                id = "password"
-                                placeholder = "password"
-                            />
-                            
-                        </FormGroup>
-                        <FormGroup check>
-                            <Label check>
-                                <Input
-                                    type = "checkbox"
-                                    id = "checkbox"
+            <Container fluid id="loginBackground">
+                <Row className="pt-5">
+                    <Jumbotron className="m-auto col-md-6 col-8" id="translucentCard">
+                        <Form>
+                            <FormGroup>
+                                <Label for = "email">Email </Label>
+                                <Input 
+                                    type = "email" 
+                                    name = "email"
+                                    id = "email"
+                                    placeholder = "abc@example.com"
                                 />
-                                Remember me
-                            </Label>
-                        </FormGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for = "password">Password</Label>
+                                <Input
+                                    type = "password"
+                                    name = "password"
+                                    id = "password"
+                                    placeholder = "password"
+                                />
+                                
+                            </FormGroup>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input
+                                        type = "checkbox"
+                                        id = "checkbox"
+                                    />
+                                    Remember me
+                                </Label>
+                            </FormGroup>
 
-                        <FormGroup className="row pt-3">
-                            <Button className="col-5 m-auto">Log In</Button>
-                            <NavLink to="/Signup" className="text-white bg-primary col-5 m-auto p-0"><Button className="w-100">Sign Up</Button></NavLink>
-                        </FormGroup>
-                        
-                    </Form>
-                </Jumbotron>
+                            <FormGroup className="row pt-3">
+                                <Button className="col-5 m-auto">Log In</Button>
+                                <NavLink to="/Signup" className="text-white bg-primary col-5 m-auto p-0"><Button className="w-100">Sign Up</Button></NavLink>
+                            </FormGroup>
+                            
+                        </Form>
+                    </Jumbotron>
+                </Row>
             </Container>
         );
     }
