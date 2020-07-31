@@ -22,7 +22,7 @@ class Navigation extends Component{
     render(){
         return(
             <Navbar id="navigationBar" expand="md">
-                <NavbarBrand>Herdic</NavbarBrand>
+                <NavbarBrand className="text-white">Herdic</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNav} className="ml-auto"> Menu</NavbarToggler>
                 <Collapse isOpen={this.state.navOpen} navbar>
                     <Nav className="ml-auto" navbar>

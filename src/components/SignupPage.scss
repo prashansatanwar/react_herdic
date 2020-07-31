@@ -1,0 +1,66 @@
+.floating-form-group{
+
+    margin-top: 25px;
+
+    Label{
+        font-size: 20px;
+    }
+
+    Input{
+        padding: 20px 15px;
+        border-radius: 10px;
+    }
+
+    // removes arrows from input type number
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+}
+
+.signup-card{
+    margin: auto;
+    margin-top: 3vh;
+    height: 450px;
+    width:650px;
+    
+    h1{
+        font-size: 45px;
+    }
+}
+
+//look into this
+@media (min-width: 650){
+    .signup-card{
+        width: 650px;
+        
+    }
+}
+
+// @media(max-width:650px){
+//     .signup-card{
+//         width: 100%;
+        
+//     }
+// }
+ 
+
+.signup-button{
+    margin: auto;
+    margin-top: 30px;
+	border-radius: 10px;
+	border-width: 0px;
+	width: 100%;
+	height: 55px;
+	background-color: #78787822;
+	font-size: 17px;
+	
+	transition: all 0.1s ease;
+
+	
+}
+.signup-button:hover{
+	border-width: 2px;
+	border-color: #8886;
+}

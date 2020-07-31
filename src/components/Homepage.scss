@@ -1,0 +1,72 @@
+.floating-label-group {
+	position: relative;
+	margin-top: 25px;
+	margin-bottom: 50px;
+
+	.floating-label {
+		font-size: 16px;
+		color: #00000088;
+		position: absolute;
+		pointer-events: none;
+		top: 13px;
+		left: 12px;
+		transition: all 0.1s ease;
+	}
+
+	.form-control {
+		padding: 25px;
+		border-radius: 10px;
+	}
+
+	input:focus ~ .floating-label,
+	input:not(:focus):valid ~ .floating-label {
+		top: -37px;
+		bottom: 0px;
+		left: 2px;
+		font-size: 20px;
+		opacity: 1;
+		color: #404040;
+	}
+}
+.check-group{
+	position: relative;
+	font-size: 16px;
+	opacity: 0.7;
+
+	.check {
+		position: absolute;
+		top: -40px;
+		left: 20px;
+	}
+	
+}
+
+.log-in-button{
+	margin: auto;
+	border-radius: 10px;
+	border-width: 0px;
+	width: 95%;
+	height: 55px;
+	background-color: #78787822;
+	font-size: 17px;
+	
+	transition: all 0.1s ease;
+
+	
+}
+.log-in-button:hover{
+	border-width: 2px;
+	border-color: #8886;
+}
+
+.login-card {
+	width: 450px;
+	height: 450px;
+	margin: auto;
+	margin-top: 17vh;
+
+	h1{
+		font-size: 50px;
+	}
+
+}

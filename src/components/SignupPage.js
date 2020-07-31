@@ -9,7 +9,9 @@ import {
     Label,
     Input,
     FormText
-} from 'reactstrap'
+} from 'reactstrap';
+
+import './SignupPage.scss';
 
 const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -24,12 +26,14 @@ class SignupPage extends Component{
             firstName: null,
             lastName:null,
             phno:null,
+            cpwd:null,
             errors: {
                 email: 'init',
                 password: 'init',
                 firstName: 'init',
                 lastName: 'init',
-                phno: 'init'
+                phno: 'init',
+                cpwd: 'init'
             }
         }
     }
@@ -41,19 +45,52 @@ class SignupPage extends Component{
 
         switch (name) {
             case 'email':
-                errors.email = validEmailRegex.test(value)?'':'Email is not valid!';
+                if(value===""){
+                    errors.email="Required";
+                }
+                else{
+                    errors.email = validEmailRegex.test(value)?'':'Email is not valid!';
+                }
                 break;
             case 'password':
-                errors.password = value.length<8?'Password must be at least 8 characters long':'';
+                if(value===""){
+                    errors.password="Required";
+                }
+                else{
+                    errors.password = value.length<8?'Password must be at least 8 characters long':'';
+                }
                 break;
             case 'firstName':
-                errors.firstName = value.match(/^[A-Za-z]+$/)?'':'Name must not contain numbers';
+                if(value===""){
+                    errors.firstName="Required";
+                }
+                else{
+                    errors.firstName = value.match(/^[A-Za-z]+$/)?'':'Name must not contain numbers';
+                }
                 break;
             case 'lastName':
-                errors.lastName = value.match(/^[A-Za-z]+$/)?'':'Name must not contain numbers';
+                if(value===""){
+                    errors.lastName="Required";
+                }
+                else{
+                    errors.lastName = value.match(/^[A-Za-z]+$/)?'':'Name must not contain numbers';
+                }
                 break;
             case 'phno':
-                errors.phno = value.length<11?'':'Phone number is not valid!';
+                if(value===""){
+                    errors.phno="Required";
+                }
+                else{
+                    errors.phno = value.length<11?'':'Phone number is not valid!';
+                }
+                break;
+            case 'cpwd':
+                if(value===""){
+                    errors.cpwd="Required";
+                }
+                else{
+                    errors.cpwd=(value===this.state.password)?"": "The passwords you entered do not match."
+                }
                 break;
         }
 
@@ -77,15 +114,19 @@ class SignupPage extends Component{
         const phno_valid={
             ['valid']:(this.state.errors.phno!=='init' && this.state.errors.phno==''),
             ['invalid']:(this.state.errors.phno!=='init' && this.state.errors.phno!=='')};
-    
+        const cpwd_valid={
+            ['valid']:(this.state.errors.cpwd!=='init' && this.state.errors.cpwd==''),
+            ['invalid']:(this.state.errors.cpwd!=='init' && this.state.errors.cpwd!=='')};
+            
 
         return(
             <Container>
-                <Jumbotron>
+                <div className="signup-card">
+                    <h1>Sign up here.</h1>
                     <Form>
                         <FormGroup>
                             <Row form>
-                                <Col sm={6}>
+                                <Col xs={12} md={6} className="floating-form-group">
                                     <Label for = "firstName">First Name</Label>
                                     <Input
                                         type = "text"
@@ -99,7 +140,7 @@ class SignupPage extends Component{
                                     {firstName_valid.invalid && 
                                     <span className='invalid-feedback'>{this.state.errors.firstName}</span>}
                                 </Col>
-                                <Col sm={6}>
+                                <Col xs={12} md={6} className="floating-form-group">
                                     <Label for = "lastName">Last Name</Label>
                                     <Input
                                         type = "text"
@@ -119,7 +160,7 @@ class SignupPage extends Component{
                         <FormGroup>
                         
                             <Row form>
-                                <Col sm={6}>
+                                <Col xs={12} md={6} className="floating-form-group">
                                     <Label for = "gender">Gender</Label>
                                     <Input
                                         type = "select"
@@ -127,14 +168,14 @@ class SignupPage extends Component{
                                         id = "gender"
 
                                     >   
-                                        <option disabled selected></option>
+                                        <option disabled selected>Select</option>
                                         <option>Female</option>
                                         <option>Male</option>
                                         <option>Prefer not to say</option>
                                     </Input>
                                 </Col>
                                 
-                                <Col sm={6}>
+                                <Col xs={12} md={6} className="floating-form-group">
                                     <Label for = "dob">Date of Birth</Label>
                                     <Input
                                         type = "date"
@@ -148,13 +189,15 @@ class SignupPage extends Component{
 
                         </FormGroup>
 
-                        <FormGroup>
+
+
+                        <FormGroup className="floating-form-group"> 
                             <Label for = "email">Email</Label>
                             <Input 
                                 type = "email"
                                 name = "email"
                                 id = "email"
-                                placeholder = "abc@example.com"
+                                placeholder = "name@example.com"
                                 {...email_valid}
                                 onChange={this.handleChange}
                                 noValidate
@@ -163,13 +206,13 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.email}</span>}
                         </FormGroup>
 
-                        <FormGroup>
+                        <FormGroup className="floating-form-group">
                             <Label for = "phno">Phone Number</Label>
                             <Input 
                                 type = "number"
                                 name = "number"
                                 id = "phno"
-                                placeholder = "+91xxxxx"
+                                placeholder = "+91 (Phone number)"
                                 {...phno_valid}
                                 onChange={this.handleChange}
                                 noValidate
@@ -179,7 +222,7 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.phno}</span>}
                         </FormGroup>
 
-                        <FormGroup>
+                        <FormGroup className="floating-form-group">
                             <Label for = "password">Password</Label>
                             <Input 
                                 type = "password"
@@ -194,20 +237,25 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.password}</span>}
                         </FormGroup>
 
-                        <FormGroup>
+                        <FormGroup className="floating-form-group">
                             <Label for = "cpwd">Confirm Password</Label>
                             <Input 
-                                type = "text"
-                                name = "text"
+                                type = "password"
+                                name = "cpwd"
                                 id = "cpwd"
-                                placeholder = "Password"
+                                placeholder = "Confirm Password"
+                                {...cpwd_valid}
+                                onChange={this.handleChange}
+                                noValidate
                             />
+                            {cpwd_valid.invalid && 
+                            <span className='invalid-feedback'>{this.state.errors.cpwd}</span>}
                         </FormGroup>
 
-                        <Button>Sign Up</Button>
+                        <button className="signup-button">Sign Up</button>
 
                     </Form>
-                </Jumbotron>
+                </div>
             </Container>
         );
     }
