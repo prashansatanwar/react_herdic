@@ -2,8 +2,6 @@ import React,{Component} from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem }  from 'reactstrap';
 import './Navigation.css';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fa } from '@fortawesome/free-solid-svg-icons'
 
 class Navigation extends Component{
 

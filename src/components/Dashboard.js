@@ -24,14 +24,19 @@ class Dashboard extends Component{
     }
     
     componentDidMount(){
-        axios.get('https://randomuser.me/api/?results=2&inc=name,registered&nat=fr')
-        .then(json => json.data.results.map( result=> (
-            {
-                name: `${result.name.first} ${result.name.last}`,
-                id: result.registered
-            }
-        ) ) )
-        .then(newData => this.setState({users:newData, store:newData}));
+
+        axios.get('http://localhost:8000/api/profile/')
+        .then(json => console.log(json))
+        
+        console.log("hi");
+        // axios.get('https://randomuser.me/api/?results=2&inc=name,registered&nat=fr')
+        // .then(json => json.data.results.map( result=> (
+        //     {
+        //         name: `${result.name.first} ${result.name.last}`,
+        //         id: result.registered
+        //     }
+        // ) ) )
+        // .then(newData => this.setState({users:newData, store:newData}));
     };
 
     

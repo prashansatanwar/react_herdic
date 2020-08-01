@@ -1,20 +1,18 @@
-import React,{Component, useState} from 'react';
+import React,{Component} from 'react';
 import {
     Container, 
-    Row, Col, 
-    Jumbotron, 
-    Button,
+    Row, Col,
     Form, 
     FormGroup,
     Label,
-    Input,
-    FormText
+    Input
 } from 'reactstrap';
 
-import './SignupPage.scss';
+import axois from 'axios';
+import './SignupPage.scss'; 
 
 const validEmailRegex = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    /^(([^<>()[]\.,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
 );
 
 class SignupPage extends Component{
@@ -36,6 +34,7 @@ class SignupPage extends Component{
                 cpwd: 'init'
             }
         }
+
     }
 
     handleChange = (event) => {
@@ -92,31 +91,57 @@ class SignupPage extends Component{
                     errors.cpwd=(value===this.state.password)?"": "The passwords you entered do not match."
                 }
                 break;
+            default:
+                break;
         }
 
         this.setState({errors, [name]: value});
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        axois.post('http://localhost:8000/api/profile/', {
+            email: this.state.email,
+            name: this.state.firstName + " " + this.state.lastName,
+            password: this.state.password
+        })
+        this.setState({
+            email: null,
+            password: null,
+            firstName: null,
+            lastName: null,
+            phno: null,
+            cpwd: null,
+            errors: {
+                email: 'init',
+                password: 'init',
+                firstName: 'init',
+                lastName: 'init',
+                phno: 'init',
+                cpwd: 'init'
+            }
+        })
+    }
 
     render(){
         const email_valid={
-            ['valid']:(this.state.errors.email!=='init' && this.state.errors.email==''),
-            ['invalid']:(this.state.errors.email!=='init' && this.state.errors.email!=='')};
+            'valid':(this.state.errors.email!=='init' && this.state.errors.email===''),
+            'invalid':(this.state.errors.email!=='init' && this.state.errors.email!=='')};
         const password_valid={
-            ['valid']:(this.state.errors.password!=='init' && this.state.errors.password==''),
-            ['invalid']:(this.state.errors.password!=='init' && this.state.errors.password!=='')};
+            'valid':(this.state.errors.password!=='init' && this.state.errors.password===''),
+            'invalid':(this.state.errors.password!=='init' && this.state.errors.password!=='')};
         const firstName_valid={
-            ['valid']:(this.state.errors.firstName!=='init' && this.state.errors.firstName==''),
-            ['invalid']:(this.state.errors.firstName!=='init' && this.state.errors.firstName!=='')};
+            'valid':(this.state.errors.firstName!=='init' && this.state.errors.firstName===''),
+            'invalid':(this.state.errors.firstName!=='init' && this.state.errors.firstName!=='')};
         const lastName_valid={
-            ['valid']:(this.state.errors.lastName!=='init' && this.state.errors.lastName==''),
-            ['invalid']:(this.state.errors.lastName!=='init' && this.state.errors.lastName!=='')};
+            'valid':(this.state.errors.lastName!=='init' && this.state.errors.lastName===''),
+            'invalid':(this.state.errors.lastName!=='init' && this.state.errors.lastName!=='')};
         const phno_valid={
-            ['valid']:(this.state.errors.phno!=='init' && this.state.errors.phno==''),
-            ['invalid']:(this.state.errors.phno!=='init' && this.state.errors.phno!=='')};
+            'valid':(this.state.errors.phno!=='init' && this.state.errors.phno===''),
+            'invalid':(this.state.errors.phno!=='init' && this.state.errors.phno!=='')};
         const cpwd_valid={
-            ['valid']:(this.state.errors.cpwd!=='init' && this.state.errors.cpwd==''),
-            ['invalid']:(this.state.errors.cpwd!=='init' && this.state.errors.cpwd!=='')};
+            'valid':(this.state.errors.cpwd!=='init' && this.state.errors.cpwd===''),
+            'invalid':(this.state.errors.cpwd!=='init' && this.state.errors.cpwd!=='')};
             
 
         return(
@@ -252,7 +277,7 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.cpwd}</span>}
                         </FormGroup>
 
-                        <button className="signup-button">Sign Up</button>
+                        <button className="signup-button" onClick={this.handleSubmit}>Sign Up</button>
 
                     </Form>
                 </div>

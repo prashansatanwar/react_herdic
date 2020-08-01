@@ -1,14 +1,11 @@
-import React,{Component, useState} from 'react';
+import React,{Component} from 'react';
 import {
     Container, 
-    Row, Col, 
-    Jumbotron, 
-    Button,
+    Row,
     Form, 
     FormGroup,
     Label,
-    Input,
-    FormText
+    Input
 } from 'reactstrap'
 import {NavLink} from 'react-router-dom';
 import "./Homepage.scss";
