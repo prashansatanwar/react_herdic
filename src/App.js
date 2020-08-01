@@ -7,17 +7,41 @@ import Dashboard from './components/Dashboard';
 import Navigation from './components/Navigation'
 
 
-function App() {
-  return (
-    <div id="app">
-      <Navigation  />
-      <Switch>
-        <Route path = "/" component = {HomePage} exact />
-        <Route path = "/Signup" component = {SignupPage} />
-        <Route path ="/Dashboard" component = {Dashboard} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component{
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      token: null,
+    }
+  }
+
+
+  setToken(token){
+    this.setState({
+      token: token,
+    })
+    console.log(this.state);
+  }
+
+  getToken(){
+    return this.state.token;
+  }
+
+  render(){
+    return (
+      <div id="app">
+        <Navigation setToken={this.setToken.bind(this)} getToken={this.getToken.bind(this)} />
+        {this.state.token}
+        <Switch>
+          <Route path = "/" component = {()=> {return( <HomePage setToken ={this.setToken.bind(this)} />)}} exact /> 
+          <Route path = "/Signup" component = {SignupPage} />
+          <Route path ="/Dashboard" component = {Dashboard} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

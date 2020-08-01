@@ -1,24 +1,19 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import { Card } from 'reactstrap'
+// import { Card } from 'reactstrap';
+import './Dashboard.scss';
+import { NavLink } from 'react-router-dom';
 
-function CardGen(props) {
-    const user=props.value;
-    return(
-        <li key={props.key}>
-            <Card className="m-5">
-                <h6>{user.name}</h6>
-                <p>{user.id.date}</p>
-            </Card>
-        </li>
-    )
-};
 
 class Dashboard extends Component{
     constructor(props){
         super(props)
         this.state = {
-            users: [],
+            user: {
+                name:"Tanmay Jain",
+                email:"tanmayj55@gmail.com",
+                phno:"+91-9898989898",
+            },
             store: []
         }
     }
@@ -42,13 +37,14 @@ class Dashboard extends Component{
     
 
     render(){
-        const userList = this.state.store.map((user,index)=> <CardGen key={index} value={user} />)
 
         return(
-            <div>
-                <ul>
-                    {userList}
-                </ul>
+            <div className="dashboard">
+                <h1>{this.state.user.name}</h1>
+                <div className="dashboard-body">
+                    <p> {this.state.user.email} <NavLink to="/signUp">edit</NavLink> </p>
+                    <p> {this.state.user.phno} <NavLink to="/signUp">edit</NavLink> </p>
+                </div>
             </div>
         );
     }

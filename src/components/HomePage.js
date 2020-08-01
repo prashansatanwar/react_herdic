@@ -9,8 +9,38 @@ import {
 } from 'reactstrap'
 import {NavLink} from 'react-router-dom';
 import "./Homepage.scss";
+import Axios from 'axios';
 
 class HomePage extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {
+            email: null,
+            password: null,
+        }
+    }
+
+
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state);
+        Axios.post('http://localhost:8000/login/',{
+            email: this.state.email,
+            password: this.state.password,
+        })
+        .then(json =>{
+            if(json.status===201){
+                console.log("Login Successful");
+                console.log(json); 
+                this.props.setToken(json.data.Token);
+            }
+            else{
+                console.log("Login Unsuccessful");
+            }
+        })
+    }
 
     render(){
     
@@ -27,9 +57,11 @@ class HomePage extends Component{
                                         type = "email" 
                                         name = "email"
                                         id = "email"
-                                        autocomplete = "false"
-                                        autofocus
+                                        autoComplete = "false"
+                                        autoFocus
                                         required
+
+                                        onChange = {(event)=>{this.setState({email: event.target.value});}}
                                     />
                                     <Label for = "email" className = "floating-label">Email </Label>
                                 </div>
@@ -41,9 +73,10 @@ class HomePage extends Component{
                                         type = "password"
                                         name = "password"
                                         id = "password"
-                                        autocomplete = "false"
-                                        autofocus
+                                        autoComplete = "false"
+                                        autoFocus
                                         required
+                                        onChange = {(event)=>{this.setState({password: event.target.value});}}
                                     />
                                     <Label for = "password" className = "floating-label">Password</Label>
                                 </div>
@@ -62,7 +95,7 @@ class HomePage extends Component{
                             </FormGroup>
 
                             <FormGroup className="row pt-3">
-                                <button border-radius="15px" className="log-in-button">Sign In</button>
+                                <button border-radius="15px" className="log-in-button" onClick={this.handleSubmit}>Sign In</button>
                                 <NavLink to="/Signup" className="ml-3 mt-1"><u>Don't have an account? Sign up</u></NavLink>
                                 {/* <NavLink to="/Signup" className="text-white bg-primary col-5 m-auto p-0"><Button className="w-100">Sign Up</Button></NavLink> */}
                             </FormGroup>

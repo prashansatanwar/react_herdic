@@ -12,7 +12,7 @@ import axois from 'axios';
 import './SignupPage.scss'; 
 
 const validEmailRegex = RegExp(
-    /^(([^<>()[]\.,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
 
 class SignupPage extends Component{
@@ -22,16 +22,18 @@ class SignupPage extends Component{
             email: null,
             password: null,
             firstName: null,
-            lastName:null,
-            phno:null,
-            cpwd:null,
+            lastName: null,
+            phno: null,
+            cpwd: null,
+            gender: null,
+            dob: null,
             errors: {
                 email: 'init',
                 password: 'init',
                 firstName: 'init',
                 lastName: 'init',
                 phno: 'init',
-                cpwd: 'init'
+                cpwd: 'init',
             }
         }
 
@@ -39,6 +41,7 @@ class SignupPage extends Component{
 
     handleChange = (event) => {
         event.preventDefault();
+        console.log(event.target);
         const{ name, value } = event.target;
         let errors = this.state.errors;
 
@@ -64,7 +67,7 @@ class SignupPage extends Component{
                     errors.firstName="Required";
                 }
                 else{
-                    errors.firstName = value.match(/^[A-Za-z]+$/)?'':'Name must not contain numbers';
+                    errors.firstName = value.match(/^[A-Z a-z]+$/)?'':'Name must not contain numbers';
                 }
                 break;
             case 'lastName':
@@ -99,12 +102,22 @@ class SignupPage extends Component{
     }
 
     handleSubmit = (event) => {
+        console.log(this.state);
         event.preventDefault();
-        axois.post('http://localhost:8000/api/profile/', {
+        axois.post('http://localhost:8000/user/', {
             email: this.state.email,
-            name: this.state.firstName + " " + this.state.lastName,
-            password: this.state.password
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            password: this.state.password,
+            gender: this.state.gender,
+            dob: this.state.dob,
+            phone_no: this.state.phno,
+
+        }).then((json)=>{
+            console.log("apple");
+            console.log(json)
         })
+
         this.setState({
             email: null,
             password: null,
@@ -112,6 +125,8 @@ class SignupPage extends Component{
             lastName: null,
             phno: null,
             cpwd: null,
+            gender: null,
+            dob: null,
             errors: {
                 email: 'init',
                 password: 'init',
@@ -162,6 +177,7 @@ class SignupPage extends Component{
                                         {...firstName_valid}
                                         onChange={this.handleChange}
                                         noValidate
+                                        required
                                     />
                                     {firstName_valid.invalid && 
                                     <span className='invalid-feedback'>{this.state.errors.firstName}</span>}
@@ -176,6 +192,7 @@ class SignupPage extends Component{
                                         {...lastName_valid}
                                         onChange={this.handleChange}
                                         noValidate
+                                        required
                                     />
                                     {lastName_valid.invalid && 
                                     <span className='invalid-feedback'>{this.state.errors.lastName}</span>}
@@ -191,14 +208,17 @@ class SignupPage extends Component{
                                     <Label for = "gender">Gender</Label>
                                     <Input
                                         type = "select"
-                                        name = "select"
+                                        name = "gender"
                                         id = "gender"
+
+                                        onChange = {this.handleChange}
+                                        required
 
                                     >   
                                         <option disabled selected>Select</option>
-                                        <option>Female</option>
-                                        <option>Male</option>
-                                        <option>Prefer not to say</option>
+                                        <option value="female" >Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="prefer not to say">Prefer not to say</option>
                                     </Input>
                                 </Col>
                                 
@@ -209,6 +229,8 @@ class SignupPage extends Component{
                                         name = "date"
                                         id = "dob"
                                         placeholder = "DD/MM/YYYY"
+                                        required
+                                        onChange = {(event) => {this.setState({dob:event.target.value})}}
                                     />
                                 </Col>
                                 
@@ -227,6 +249,7 @@ class SignupPage extends Component{
                                 {...email_valid}
                                 onChange={this.handleChange}
                                 noValidate
+                                required
                             />
                             {email_valid.invalid && 
                             <span className='invalid-feedback'>{this.state.errors.email}</span>}
@@ -237,12 +260,13 @@ class SignupPage extends Component{
                             <Label for = "phno">Phone Number</Label>
                             <Input 
                                 type = "number"
-                                name = "number"
+                                name = "phno"
                                 id = "phno"
                                 placeholder = "+91 (Phone number)"
                                 {...phno_valid}
                                 onChange={this.handleChange}
                                 noValidate
+                                required
                             />
 
                             {phno_valid.invalid && 
@@ -259,6 +283,7 @@ class SignupPage extends Component{
                                 placeholder = "Password"
                                 {...password_valid}
                                 onChange={this.handleChange}
+                                required
                                 noValidate
                             />
                             {password_valid.invalid && 
@@ -276,6 +301,7 @@ class SignupPage extends Component{
                                 {...cpwd_valid}
                                 onChange={this.handleChange}
                                 noValidate
+                                required
                             />
                             {cpwd_valid.invalid && 
                             <span className='invalid-feedback'>{this.state.errors.cpwd}</span>}
