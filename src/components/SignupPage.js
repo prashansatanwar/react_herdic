@@ -149,6 +149,7 @@ class SignupPage extends Component{
                 <div className="signup-card">
                     <h1>Sign up here.</h1>
                     <Form>
+                        {/* First Name and Last Name */}
                         <FormGroup>
                             <Row form>
                                 <Col xs={12} md={6} className="floating-form-group">
@@ -182,6 +183,7 @@ class SignupPage extends Component{
                             </Row>
                         </FormGroup>
 
+                        {/* Gender and DOB */}
                         <FormGroup>
                         
                             <Row form>
@@ -214,8 +216,7 @@ class SignupPage extends Component{
 
                         </FormGroup>
 
-
-
+                        {/* Email */}
                         <FormGroup className="floating-form-group"> 
                             <Label for = "email">Email</Label>
                             <Input 
@@ -231,6 +232,7 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.email}</span>}
                         </FormGroup>
 
+                        {/* Phone Number */}
                         <FormGroup className="floating-form-group">
                             <Label for = "phno">Phone Number</Label>
                             <Input 
@@ -247,6 +249,7 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.phno}</span>}
                         </FormGroup>
 
+                        {/* Password */}
                         <FormGroup className="floating-form-group">
                             <Label for = "password">Password</Label>
                             <Input 
@@ -262,6 +265,7 @@ class SignupPage extends Component{
                             <span className='invalid-feedback'>{this.state.errors.password}</span>}
                         </FormGroup>
 
+                        {/* Confirm Password */}
                         <FormGroup className="floating-form-group">
                             <Label for = "cpwd">Confirm Password</Label>
                             <Input 
