@@ -28,7 +28,7 @@ class SideBar extends React.Component {
         const barStyle = (this.state.isThin)? { width:'very thin'}: {width:'thin'}
 
         return(
-            <Grid columns={1} fluid>
+            <Grid columns={1}>
               <Grid.Column className="pt-2">
         
                 <Sidebar.Pushable as={Segment}>
@@ -80,7 +80,8 @@ class SideBar extends React.Component {
         
                   <Sidebar.Pusher>
                     <Segment basic >
-                      {Switcher(this.props.switcher())}
+                      {Switcher({value:this.props.switcher(),
+                        getUser: this.props.getUser})}
                     </Segment>
                   </Sidebar.Pusher>
                 </Sidebar.Pushable>
@@ -155,8 +156,8 @@ class SideBar extends React.Component {
 //     );
 //   }
   
-  const Switcher = (value) =>{
-    if(value === 'Dashboard') return <Dashboard/>;
+  const Switcher = (props) =>{
+    if(props.value === 'Dashboard') return <Dashboard  getUser={props.getUser} />;
   
   }
 

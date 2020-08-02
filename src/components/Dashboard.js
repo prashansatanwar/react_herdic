@@ -2,54 +2,33 @@ import React,{Component} from 'react';
 import axios from 'axios';
 // import { Card } from 'reactstrap';
 import './Dashboard.scss';
-import { NavLink } from 'react-router-dom';
-import { Jumbotron } from 'reactstrap';
 
 class Dashboard extends Component{
     constructor(props){
         super(props)
         this.state = {
-            user: {
-                name:"Tanmay Jain",
-                email:"tanmayj55@gmail.com",
-                phno:"+91-9898989898",
-            },
-            store: []
+            user: {},
         }
     }
-    
     componentDidMount(){
-
-        axios.get('http://ec2-13-234-74-240.ap-south-1.compute.amazonaws.com:8000/user/')
-        .then(json => {
-            console.log(json);
-            // this.setState({ user:json.data[0]});
-        })
+        this.setState({user:this.props.getUser()});
         
-        console.log("hi");
-        // axios.get('https://randomuser.me/api/?results=2&inc=name,registered&nat=fr')
-        // .then(json => json.data.results.map( result=> (
-        //     {
-        //         name: `${result.name.first} ${result.name.last}`,
-        //         id: result.registered
-        //     }
-        // ) ) )
-        // .then(newData => this.setState({users:newData, store:newData}));
+        console.log(this.state)
     };
 
     
 
     render(){
-
         return(
             <div className="dashboard">
                 <h1>{this.state.user.name}</h1>
                 <div className="dashboard-body">
                     <p> {this.state.user.email} </p>
-                    <p> {this.state.user.phno} </p>
+                    <p> {this.state.user.phone_no} </p>
+                    <p> {this.state.user.dob} </p>
                 </div>
 
-                <div class="ui positive floating message mr-5">
+                <div className="ui positive floating message dashboard-body mr-5">
                     <p><b> Status:  </b> <br></br>Approved!</p>
                 </div>
 

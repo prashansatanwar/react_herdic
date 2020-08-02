@@ -10,6 +10,7 @@ import {
 
 import axois from 'axios';
 import './SignupPage.scss'; 
+import {withRouter, Route} from 'react-router-dom';
 
 const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -114,7 +115,10 @@ class SignupPage extends Component{
             phone_no: this.state.phno,
 
         }).then((json)=>{
-            console.log("apple");
+            console.log(json.status);
+            if(json.status == 201){
+                this.props.history.push('/');               
+            }
             console.log(json)
         })
 
@@ -316,4 +320,4 @@ class SignupPage extends Component{
     }
 }
 
-export default SignupPage;
+export default withRouter(SignupPage);

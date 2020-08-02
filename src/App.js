@@ -26,10 +26,20 @@ class App extends React.Component{
 
     this.state = {
       token: null,
-      current:'Dashboard'
+      current:'Dashboard',
+      user: null
     }
   }
 
+  getUser(){
+    return this.state.user;
+  }
+
+  setUser(value){
+    this.setState({user: value});
+    console.log(this.state.user);
+    console.log("in set state user")
+  }
 
   setToken(token){
     this.setState({
@@ -56,10 +66,21 @@ class App extends React.Component{
 
 
         <Switch>
-          <Route path = "/" component = {()=> {return( <HomePage setToken ={this.setToken.bind(this)} />)}} exact /> 
+          <Route path = "/" component = {()=> {
+            return( <HomePage 
+              setToken ={this.setToken.bind(this)} 
+              getUser = {this.getUser.bind(this)}
+              setUser = {this.setUser.bind(this)}
+              
+              />)}} exact /> 
+          
+          
           <Route path = "/Signup" component = {SignupPage} />
           <Route path ="/Dashboard" component = {() => {
-            return( <SideBar switcher = {this.getCurrent.bind(this)} 
+            return( <SideBar 
+              switcher = {this.getCurrent.bind(this)} 
+              getUser = {this.getUser.bind(this)}
+              setUser = {this.setUser.bind(this)}
             /> 
             )}} />
         </Switch>

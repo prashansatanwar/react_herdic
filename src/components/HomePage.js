@@ -10,8 +10,7 @@ import {
 import {NavLink} from 'react-router-dom';
 import "./Homepage.scss";
 import Axios from 'axios';
-import { Redirect } from "react-router-dom";
-import Dashboard from './Dashboard';
+import { Redirect, withRouter } from "react-router-dom";
 
 
 class HomePage extends Component{
@@ -44,6 +43,14 @@ class HomePage extends Component{
                     console.log(json); 
                     this.props.setToken(json.data.Token);
                     this.setState({failed:false})
+                    // this.setState({user: json.data})
+                    this.props.setUser({
+                        name:json.data.Name,
+                        phone_no:json.data['Phone No'],
+                        email:this.state.email,
+                        dob:json.data['Date of Birth'],
+                    });
+                    this.props.history.push('/dashboard')
                     // source.cancel();
                     
                 }else{
@@ -62,9 +69,9 @@ class HomePage extends Component{
 
     render(){
 
-        if(this.state.failed==false){
-            return(<Redirect to="/Dashboard" />)
-        }
+        // if(this.state.failed==false){
+        //     return(<Redirect to="/Dashboard" />)
+        // }
     
             return (
             <Container fluid id="login-background">
@@ -136,4 +143,4 @@ class HomePage extends Component{
     }
 }
 
-export default HomePage;
+export default withRouter(HomePage);
