@@ -44,8 +44,8 @@ class Dashboard extends Component{
             <div className="dashboard">
                 <h1>{this.state.user.name}</h1>
                 <div className="dashboard-body">
-                    <p> {this.state.user.email} <NavLink to="/signUp">edit</NavLink> </p>
-                    <p> {this.state.user.phno} <NavLink to="/signUp">edit</NavLink> </p>
+                    <p> {this.state.user.email} </p>
+                    <p> {this.state.user.phno} </p>
                 </div>
             </div>
         );
