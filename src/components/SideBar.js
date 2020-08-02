@@ -51,30 +51,30 @@ class SideBar extends React.Component {
                   >
                       
                       
-                    <Menu.Item  as='a' className='bord m-1 pb-4 pt-4'>
-                      <i className="home icon" />
+                    <Menu.Item  as='a' className='m-1 pb-4 pt-4'>
+                    <i className="user icon"></i>
                       {!this.state.isThin && 
-                      'label'}
+                      'Dashboard'}
                     </Menu.Item>
                     <Menu.Item as='a'className='m-1 pb-4 pt-4'>
-                      <i className='gamepad icon' />
+                      <i className='upload icon' />
                       {!this.state.isThin && 
-                      'label'}
+                      'Upload'}
                     </Menu.Item>
                     <Menu.Item as='a' className='m-1 pb-4 pt-4'>
-                      <i className='camera icon' />
+                      <i className='chart line icon' />
                       {!this.state.isThin && 
-                      'label'}
-                    </Menu.Item>
-                    <Menu.Item as='a' className='m-1 pb-4 pt-4'>
-                      <i className="home icon" />
-                      {!this.state.isThin && 
-                      'label'}
+                      'Data'}
                     </Menu.Item>
                     <Menu.Item as='a'className='m-1 pb-4 pt-4'>
-                      <i className='gamepad icon' />
+                      <i className='history icon' />
                       {!this.state.isThin && 
-                      'label'}
+                      'History'}
+                    </Menu.Item>
+                    <Menu.Item as='a' className='m-1 pb-4 pt-4'>
+                      <i className="comment alternate icon" />
+                      {!this.state.isThin && 
+                      'Help'}
                     </Menu.Item>
                   </Sidebar>
         
@@ -91,70 +91,6 @@ class SideBar extends React.Component {
           );
     }
 }
-
-// const SideBar= (props) =>{
-//     let [visible, setVisible]= React.useState(false);
-//     // visible = props.getVisibility();
-  
-//     React.useEffect(()=>{
-//       console.log("changed");
-//     },[props.getVisibility]);
-  
-//     return(
-//       <Grid columns={1}>
-  
-//         <Grid.Column>
-//           <Checkbox
-//             checked={visible}
-//             label={{ children: <code>visible</code> }}
-//             onChange={(e, data) => {
-//               setVisible(data.checked)
-//               props.setVisiblity(data.checked);
-//             }}
-//           />
-//         </Grid.Column>
-//         <Grid.Column>
-  
-//           <Sidebar.Pushable as={Segment}>
-//             <Sidebar
-//               as={Menu}
-//               animation='slide along'
-//               icon='labeled'
-//               inverted
-//               onHide= {()=>{
-//                 setVisible(false);
-//                 props.setVisiblity(false);
-//               }}
-//               vertical
-//               visible={visible}
-//               width='thin'
-//             >
-//               <Menu.Item as='a'>
-//                 <Icon name='home' />
-//                 Home
-//               </Menu.Item>
-//               <Menu.Item as='a'>
-//                 <Icon name='gamepad' />
-//                 Games
-//               </Menu.Item>
-//               <Menu.Item as='a'>
-//                 <Icon name='camera' />
-//                 Channels
-//               </Menu.Item>
-//               {/* <Menu.Header>HEADER</Menu.Header> */}
-//             </Sidebar>
-  
-//             <Sidebar.Pusher dimmed={visible}>
-//               <Segment basic >
-//                 {Switcher(props.switcher())}
-//               </Segment>
-//             </Sidebar.Pusher>
-//           </Sidebar.Pushable>
-  
-//         </Grid.Column>
-//       </Grid>
-//     );
-//   }
   
   const Switcher = (props) =>{
     if(props.value === 'Dashboard') return <Dashboard  getUser={props.getUser} />;
