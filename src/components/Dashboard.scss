@@ -1,7 +1,9 @@
 .dashboard{
     // background-color: pink;
-    margin: 0px 30px;
-    padding: 10px;
+    margin: 0px 10px;
+    padding: 0px;
+
+    
 
 
     h1{
@@ -10,11 +12,14 @@
     }
 
     .dashboard-body{
+        margin-right: 75px;
         padding: 30px 10px;
         background-color: #6663;
         border-radius: 10px;
         p{
             margin: 0px 0px;
         }
+
+    
     }
 }

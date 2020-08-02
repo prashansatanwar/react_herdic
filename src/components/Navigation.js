@@ -3,6 +3,7 @@ import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem }  from 'rea
 import './Navigation.css';
 import { NavLink } from 'react-router-dom';
 import Axios from 'axios';
+import { Icon } from 'semantic-ui-react';
 
 class Navigation extends Component{
 
@@ -11,6 +12,8 @@ class Navigation extends Component{
         this.state={
             navOpen:false
         };
+
+
     }
 
     toggleNav = () => {
@@ -46,9 +49,9 @@ class Navigation extends Component{
 
     render(){
         return(
-            <Navbar id="navigationBar" expand="md">
-                <NavbarBrand className="text-white">Herdic</NavbarBrand>
-                <NavbarToggler onClick={this.toggleNav} className="ml-auto"> Menu</NavbarToggler>
+            <Navbar id="navigationBar" expand="md" >
+                <NavbarBrand className="text-white" >Herdic</NavbarBrand>
+                <NavbarToggler onClick={this.toggleNav} className="ml-auto text-white"> Menu</NavbarToggler>
                 <Collapse isOpen={this.state.navOpen} navbar>
                         {this.getButtons()}
                 </Collapse>

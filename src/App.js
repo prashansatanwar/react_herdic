@@ -4,7 +4,19 @@ import {Route, Switch} from 'react-router-dom';
 import HomePage from './components/HomePage'
 import SignupPage from './components/SignupPage';
 import Dashboard from './components/Dashboard';
-import Navigation from './components/Navigation'
+import SideBar from "./components/SideBar"
+import Navigation from './components/Navigation';
+import {
+  Button,
+  Checkbox,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+} from 'semantic-ui-react'
 
 
 class App extends React.Component{
@@ -14,6 +26,7 @@ class App extends React.Component{
 
     this.state = {
       token: null,
+      current:'Dashboard'
     }
   }
 
@@ -29,19 +42,34 @@ class App extends React.Component{
     return this.state.token;
   }
 
+  getCurrent(){
+    return this.state.current;
+  }
+
   render(){
     return (
       <div id="app">
-        <Navigation setToken={this.setToken.bind(this)} getToken={this.getToken.bind(this)} />
-        {this.state.token}
+        <Navigation 
+          setToken={this.setToken.bind(this)} 
+          getToken={this.getToken.bind(this)}
+        />
+
+
         <Switch>
           <Route path = "/" component = {()=> {return( <HomePage setToken ={this.setToken.bind(this)} />)}} exact /> 
           <Route path = "/Signup" component = {SignupPage} />
-          <Route path ="/Dashboard" component = {Dashboard} />
+          <Route path ="/Dashboard" component = {() => {
+            return( <SideBar switcher = {this.getCurrent.bind(this)} 
+            /> 
+            )}} />
         </Switch>
       </div>
     );
   }
 }
+
+
+
+
 
 export default App;
