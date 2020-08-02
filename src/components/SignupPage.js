@@ -142,6 +142,12 @@ class SignupPage extends Component{
         })
     }
 
+    componentDidMount(){
+        if(localStorage.length!=0){
+            this.props.history.push('/dashboard');
+        }
+    }
+
     render(){
         const email_valid={
             'valid':(this.state.errors.email!=='init' && this.state.errors.email===''),

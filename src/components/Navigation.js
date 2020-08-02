@@ -24,6 +24,8 @@ class Navigation extends Component{
     logout = () => {
         Axios.post('http://localhost:8000/logout/', {Token: this.props.getToken()});
         this.props.setToken(null);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
     }
     getButtons=()=>{
         if(this.props.getToken()==null){

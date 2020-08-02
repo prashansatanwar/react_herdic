@@ -50,6 +50,14 @@ class HomePage extends Component{
                         email:this.state.email,
                         dob:json.data['Date of Birth'],
                     });
+                    localStorage.setItem('user',JSON.stringify({
+                        name:json.data.Name,
+                        phone_no:json.data['Phone No'],
+                        email:this.state.email,
+                        dob:json.data['Date of Birth'],
+                    }))
+                    localStorage.setItem('token', json.data.Token);
+                    
                     this.props.history.push('/dashboard')
                     // source.cancel();
                     
@@ -66,6 +74,14 @@ class HomePage extends Component{
             }
         })
     }
+
+    componentDidMount(){
+        if(localStorage.length != 0){
+            this.props.history.push('/dashboard');
+        }
+    }
+
+
 
     render(){
 
@@ -87,7 +103,6 @@ class HomePage extends Component{
                                         name = "email"
                                         id = "email"
                                         autoComplete = "false"
-                                        autoFocus
                                         required
 
                                         onChange = {(event)=>{this.setState({email: event.target.value});}}
@@ -103,7 +118,6 @@ class HomePage extends Component{
                                         name = "password"
                                         id = "password"
                                         autoComplete = "false"
-                                        autoFocus
                                         required
                                         onChange = {(event)=>{this.setState({password: event.target.value});}}
                                     />

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 // import { Card } from 'reactstrap';
 import './Dashboard.scss';
+import {withRouter} from 'react-router-dom';
 
 class Dashboard extends Component{
     constructor(props){
@@ -11,9 +12,15 @@ class Dashboard extends Component{
         }
     }
     componentDidMount(){
-        this.setState({user:this.props.getUser()});
+        const u=localStorage.getItem('user');
+        if(u === null){
+            this.props.history.push('/');
+        }
+
         
-        console.log(this.state)
+        this.setState({user:JSON.parse(localStorage.getItem('user'))});
+        
+        console.log(this.state);
     };
 
     
@@ -39,4 +46,4 @@ class Dashboard extends Component{
 }
 
 
-export default Dashboard;
+export default withRouter(Dashboard);

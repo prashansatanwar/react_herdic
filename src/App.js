@@ -56,6 +56,10 @@ class App extends React.Component{
     return this.state.current;
   }
 
+  componentDidMount(){
+    this.setState({token: localStorage.getItem('token')});
+  }
+
   render(){
     return (
       <div id="app">
