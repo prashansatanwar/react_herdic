@@ -3,6 +3,7 @@ import axios from 'axios';
 // import { Card } from 'reactstrap';
 import './Dashboard.scss';
 import { NavLink } from 'react-router-dom';
+import { Jumbotron } from 'reactstrap';
 
 class Dashboard extends Component{
     constructor(props){
@@ -47,6 +48,12 @@ class Dashboard extends Component{
                     <p> {this.state.user.email} </p>
                     <p> {this.state.user.phno} </p>
                 </div>
+
+                <div class="ui positive floating message mr-5">
+                    <p><b> Status:  </b> <br></br>Approved!</p>
+                </div>
+
+
             </div>
         );
     }
