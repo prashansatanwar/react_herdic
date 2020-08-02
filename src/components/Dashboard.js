@@ -19,8 +19,11 @@ class Dashboard extends Component{
     
     componentDidMount(){
 
-        axios.get('http://localhost:8000/api/profile/')
-        .then(json => console.log(json))
+        axios.get('http://ec2-13-234-74-240.ap-south-1.compute.amazonaws.com:8000/user/')
+        .then(json => {
+            console.log(json);
+            // this.setState({ user:json.data[0]});
+        })
         
         console.log("hi");
         // axios.get('https://randomuser.me/api/?results=2&inc=name,registered&nat=fr')

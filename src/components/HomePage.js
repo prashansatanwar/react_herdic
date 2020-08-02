@@ -10,6 +10,9 @@ import {
 import {NavLink} from 'react-router-dom';
 import "./Homepage.scss";
 import Axios from 'axios';
+import { Redirect } from "react-router-dom";
+import Dashboard from './Dashboard';
+
 
 class HomePage extends Component{
     constructor(props){
@@ -18,6 +21,7 @@ class HomePage extends Component{
         this.state = {
             email: null,
             password: null,
+            failed:null
         }
     }
 
@@ -26,23 +30,41 @@ class HomePage extends Component{
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state);
-        Axios.post('http://localhost:8000/login/',{
+        // const CancelToken = Axios.CancelToken;
+        // const source = CancelToken.source();
+
+        Axios.post('http://ec2-13-234-74-240.ap-south-1.compute.amazonaws.com:8000/login/',{
             email: this.state.email,
             password: this.state.password,
         })
         .then(json =>{
-            if(json.status===201){
-                console.log("Login Successful");
-                console.log(json); 
-                this.props.setToken(json.data.Token);
+            if(json.status===200){
+                if(json.data.Message!=="Wrong Credentials"){
+                    console.log("Login Successful");
+                    console.log(json); 
+                    this.props.setToken(json.data.Token);
+                    this.setState({failed:false})
+                    // source.cancel();
+                    
+                }else{
+                    this.setState({failed:true});
+                    console.log("Login Unsuccessful")
+                    console.log(json.data)
+                }
             }
             else{
-                console.log("Login Unsuccessful");
+                this.setState({failed:true});
+                console.log("Bad Request");
+                console.log(json);
             }
         })
     }
 
     render(){
+
+        if(this.state.failed==false){
+            return(<Redirect to="/Dashboard" />)
+        }
     
             return (
             <Container fluid id="login-background">
@@ -99,6 +121,12 @@ class HomePage extends Component{
                                 <NavLink to="/Signup" className="ml-3 mt-1"><u>Don't have an account? Sign up</u></NavLink>
                                 {/* <NavLink to="/Signup" className="text-white bg-primary col-5 m-auto p-0"><Button className="w-100">Sign Up</Button></NavLink> */}
                             </FormGroup>
+                            {this.state.failed && 
+                            <div class="ui negative floating message">
+                            
+                                <p>Invalid Email or password!</p>
+                            </div>
+                            }
                             
                         </Form>
                     </div>

@@ -104,7 +104,7 @@ class SignupPage extends Component{
     handleSubmit = (event) => {
         console.log(this.state);
         event.preventDefault();
-        axois.post('http://localhost:8000/user/', {
+        axois.post('http://ec2-13-234-74-240.ap-south-1.compute.amazonaws.com:8000/user/', {
             email: this.state.email,
             first_name: this.state.firstName,
             last_name: this.state.lastName,
