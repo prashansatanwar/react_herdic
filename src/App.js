@@ -3,20 +3,9 @@ import './App.css';
 import {Route, Switch} from 'react-router-dom';
 import HomePage from './components/HomePage'
 import SignupPage from './components/SignupPage';
-import Dashboard from './components/Dashboard';
 import SideBar from "./components/SideBar"
-import Navigation from './components/Navigation';
-import {
-  Button,
-  Checkbox,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Sidebar,
-} from 'semantic-ui-react'
+import Navigation from './components/Navigation'
+import Visualizer from './components/Visualizer';
 
 
 class App extends React.Component{
@@ -63,6 +52,8 @@ class App extends React.Component{
   render(){
     return (
       <div id="app">
+
+
         <Navigation 
           setToken={this.setToken.bind(this)} 
           getToken={this.getToken.bind(this)}
@@ -70,6 +61,11 @@ class App extends React.Component{
 
 
         <Switch>
+
+
+    <Route path ='/visualizer' component ={Visualizer}></Route>
+
+
           <Route path = "/" component = {()=> {
             return( <HomePage 
               setToken ={this.setToken.bind(this)} 

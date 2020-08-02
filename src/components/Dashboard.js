@@ -1,6 +1,4 @@
 import React,{Component} from 'react';
-import axios from 'axios';
-// import { Card } from 'reactstrap';
 import './Dashboard.scss';
 import {withRouter} from 'react-router-dom';
 

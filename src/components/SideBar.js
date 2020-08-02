@@ -1,12 +1,7 @@
 import React from 'react';
 import Dashboard from './Dashboard';
 import {
-  Button,
-  Checkbox,
   Grid,
-  Header,
-  Icon,
-  Image,
   Menu,
   Segment,
   Sidebar,

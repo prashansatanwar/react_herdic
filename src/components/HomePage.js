@@ -10,7 +10,7 @@ import {
 import {NavLink} from 'react-router-dom';
 import "./Homepage.scss";
 import Axios from 'axios';
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 
 class HomePage extends Component{
