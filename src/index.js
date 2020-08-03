@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css'
 import {BrowserRouter} from 'react-router-dom';
-import $ from 'jquery'; 
+
 import 'react-vis/dist/style.css';
 
 ReactDOM.render(

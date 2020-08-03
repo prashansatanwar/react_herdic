@@ -7,23 +7,22 @@ import {
     HorizontalGridLines,
     MarkSeries,
     LineMarkSeries,
-    Hint,
-    AreaSeries,
-    GradientDefs} from 'react-vis';
+    Hint,} from 'react-vis';
 
 class Visualizer extends React.Component{
     
     constructor(props){
         super(props)
         this.state = {
-            data:[{x: 0,y: 0},{x: 1, y: 11}, {x: 1.5, y: 29}, {x: 3, y: 7}],
-            min:5,
-            max:20,
+            data:(this.props.data)?this.props.data:[{x:0,y:0}],
+            min:(this.props.min)?this.props.min:5,
+            max:(this.props.max)?this.props.max:20,
             datapoint:null,
             primaryColor:'#CBB8A9',
             secondaryColor: '#32746D',
             yLabel:'Cholestrol'
         }
+        console.log("bangya")
     }
 
     outliers(){
@@ -39,7 +38,12 @@ class Visualizer extends React.Component{
                 onMouseLeave ={()=>this.setState({datapoint:null})}>
               <VerticalGridLines />
               <HorizontalGridLines />
-              <XAxis />
+              <XAxis tickFormat={d =>  
+                {   
+                    var dd=new Date(d)
+                    return dd.getDateString();
+                }
+               } />
               <YAxis />
               <LineMarkSeries
                 className="linemark-series-example-2"

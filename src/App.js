@@ -61,22 +61,16 @@ class App extends React.Component{
 
 
         <Switch>
-
-
-    <Route path ='/visualizer' component ={Visualizer}></Route>
-
-
+          <Route path ='/visualizer' component ={Visualizer}></Route>
           <Route path = "/" component = {()=> {
             return( <HomePage 
               setToken ={this.setToken.bind(this)} 
               getUser = {this.getUser.bind(this)}
-              setUser = {this.setUser.bind(this)}
-              
-              />)}} exact /> 
-          
+              setUser = {this.setUser.bind(this)} />)}} exact /> 
           
           <Route path = "/Signup" component = {SignupPage} />
-          <Route path ="/Dashboard" component = {() => {
+          
+          <Route path ={["/Dashboard","/History","/Upload","/Help","/visualize"]} component = {() => {
             return( <SideBar 
               switcher = {this.getCurrent.bind(this)} 
               getUser = {this.getUser.bind(this)}

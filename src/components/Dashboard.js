@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './Dashboard.scss';
-import {withRouter} from 'react-router-dom';
+// import {withRouter} from 'react-router-dom';
 
 class Dashboard extends Component{
     constructor(props){
@@ -11,11 +11,7 @@ class Dashboard extends Component{
     }
     componentDidMount(){
         const u=localStorage.getItem('user');
-        if(u === null){
-            this.props.history.push('/');
-        }
 
-        
         this.setState({user:JSON.parse(localStorage.getItem('user'))});
         
         console.log(this.state);
@@ -44,4 +40,4 @@ class Dashboard extends Component{
 }
 
 
-export default withRouter(Dashboard);
+export default Dashboard;
